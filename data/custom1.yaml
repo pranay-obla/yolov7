@@ -6,7 +6,7 @@ download: bash ./scripts/get_coco.sh
 # train and val data as 1) directory: path/images/, 2) file: path/images.txt, or 3) list: [path1/images/, path2/images/]
 train: C:\Users\prana\Desktop\Internship\yolov7\custom_dataset_1\train\images
 val: C:\Users\prana\Desktop\Internship\yolov7\custom_dataset_1\val\images
-# test: ./coco/test-dev2017.txt 
+test: C:\Users\prana\Desktop\Internship\yolov7\custom_test_1
 
 # number of classes
 nc: 4

@@ -1,43 +1,26 @@
-from sklearn.metrics import confusion_matrix, accuracy_score, precision_score, recall_score, f1_score, classification_report
+import numpy as np
+from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score
 
-# Define the confusion matrix
-cm = [[0.00, 0.18, 1.00, 1.00, 0.00],
-      [0.00, 0.00, 0.00, 0.00, 0.00],
-      [0.00, 0.00, 0.00, 0.00, 0.00],
-      [0.00, 0.82, 0.00, 0.00, 1.00],
-      [1.00, 0.00, 0.00, 0.00, 0.00]]
+# Your input confusion matrix
+cm = np.array([[0.25, 0.00, 0.00, 0.00, 0.00],
+               [0.00, 0.79, 0.00, 0.00, 1.00],
+               [0.00, 0.00, 0.00, 0.00, 0.00],
+               [0.00, 0.00, 0.00, 0.00, 0.00],
+               [0.75, 0.21, 1.00, 1.00, 0.00]])
 
-# Convert the confusion matrix to integer values (if necessary)
-cm = [[int(round(val)) for val in row] for row in cm]
-print(cm)
+# Assuming you have a binary threshold to convert the confusion matrix to predictions (0 or 1)
+threshold = 0.5
+y_pred = (cm >= threshold).astype(int)
 
-# Extract true labels and predicted labels from the confusion matrix
-y_true = []
-y_pred = []
-for i in range(len(cm)):
-    for j in range(len(cm)):
-        y_true.extend([i] * cm[i][j])
-        y_pred.extend([j] * cm[i][j])
-print("True Labels:", y_true)
-print("Predicted Labels:", y_pred)
+# Calculate evaluation metrics
+y_true = np.array([0, 1, 0, 0, 1])  # Replace this with your true labels
 
-'''
-# Calculate various metrics
 accuracy = accuracy_score(y_true, y_pred)
-precision = precision_score(y_true, y_pred, average='weighted')
-recall = recall_score(y_true, y_pred, average='weighted')
-f1 = f1_score(y_true, y_pred, average='weighted')
+precision = precision_score(y_true, y_pred)
+recall = recall_score(y_true, y_pred)
+f1 = f1_score(y_true, y_pred)
 
-# Print the metrics
-print(f"Accuracy: accuracy")
-print(f"Precision: precision")
-print(f"Recall: recall")
-print(f"F1 Score: f1")
-'''
-
-# Generate a classification report
-target_names = ['Class 0', 'Class 1', 'Class 2', 'Class 3', 'Class 4']
-classification_rep = classification_report(y_true, y_pred, target_names=target_names)
-
-print("\nClassification Report:")
-print(classification_rep)
+print("Accuracy:", accuracy)
+print("Precision:", precision)
+print("Recall:", recall)
+print("F1-Score:", f1)
